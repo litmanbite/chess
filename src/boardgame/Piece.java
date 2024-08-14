@@ -10,7 +10,7 @@ public class Piece {
     private Board board;
 
    
-    ´protected Board getBoard() {
+    protected Board getBoard() {
         return board;
     }
     
