@@ -1,0 +1,24 @@
+package chess;
+
+import boardgame.Board;
+import boardgame.Piece;
+
+public class ChessPiece extends Piece {
+
+    private Color cor;
+
+    public Color getCor() {
+        return cor;
+    }
+
+    public void setCor(Color cor) {
+        this.cor = cor;
+    }
+
+    public ChessPiece(Board board,Color cor) {
+        super(board);
+        this.cor=cor;
+    }
+
+
+}
