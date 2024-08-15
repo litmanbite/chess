@@ -34,12 +34,9 @@ public class Chessmatch {
         bw = Color.WHITE;
         initialize();
     }
-    private void nextTurn(){
+    private void nextTurn() {
         turn++;
-        if (bw == Color.WHITE)
-            bw = Color.BLACK;
-        else 
-            bw = Color.WHITE;
+        bw = (bw == Color.WHITE) ? Color.BLACK : Color.WHITE;
     }
     public ChessPiece[][] getPieces(){
         ChessPiece[][] mat = new ChessPiece[board.getRows()][board.getColumns()];
@@ -59,12 +56,12 @@ public class Chessmatch {
         validateTo(f,t);
         Piece capturedPiece = makeMove(f,t);
 
-        if (testC(bw)){
+         if (testC(bw)){
             undoMove(f, t, capturedPiece);
             throw new ChessExcep("You cannot put yourself in check");            
         }
         
-       // check = (testC(bw))? true : false;
+        check = (testC(bw))? true : false;
 
         nextTurn();
         return (ChessPiece) capturedPiece;
@@ -143,18 +140,17 @@ public class Chessmatch {
         throw new IllegalStateException("There is no K");
     }
 
-    private boolean testC(Color c){
-        Position k = kPiece(c).getChessPos().toPos();
-        List<Piece> oppList = piecesOn.stream()
-            .filter(p -> p.getCor() == opp(c))
-            .collect(Collectors.toList());
-        for (Piece p : oppList){
-            boolean [][] mat = p.possibleMoves();
-            if (mat[k.getRow()][k.getColumn()])
-                return true;
-        }
-        return false;
-    }
+     private boolean testC(Color color) {
+		Position kingPosition = kPiece(color).getChessPos().toPos();
+		List<Piece> opponentPieces = piecesOn.stream().filter(x -> ((ChessPiece)x).getCor() == opp(color)).collect(Collectors.toList());
+		for (Piece p : opponentPieces) {
+			boolean[][] mat = p.possibleMoves();
+			if (mat[kingPosition.getRow()][kingPosition.getColumn()]) {
+				return true;
+			}
+		}
+		return false;
+	}
 
     private void placeNewPiece(char c,int r,ChessPiece p){
         board.placePiece(p, new ChessPos(r, c).toPos());

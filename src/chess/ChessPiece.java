@@ -27,7 +27,7 @@ public abstract class ChessPiece extends Piece {
     }
 
     public ChessPos getChessPos(){
-        return ChessPos.fromPos(position);
+        return ChessPos.fromPosition(position);
     }
 
 }
