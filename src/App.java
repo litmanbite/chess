@@ -15,14 +15,19 @@ public class App {
         while (true){
             try{
                 UI.clearScreen();
-                UI.printBoard(cs.getPieces());
+                UI.printMatch(cs);
                 System.out.println();
+
                 System.out.print("From :");
                 ChessPos from = UI.readChessPos(sc);
+                boolean[][] pm = cs.possibleMoves(from);
+                UI.clearScreen();
+                UI.printBoard(cs.getPieces(),pm);
+
                 System.out.println();
                 System.out.print("To :");
                 ChessPos to = UI.readChessPos(sc);
-
+                
                 ChessPiece cp = cs.performMove(from,to);
             }
             catch(ChessExcep e){

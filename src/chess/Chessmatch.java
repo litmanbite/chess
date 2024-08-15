@@ -8,12 +8,30 @@ import pieces.Rook;
 
 public class Chessmatch {
     private Board board;
+    private Color bw;
+    private int turn;
+
+    public int getTurn() {
+        return turn;
+    }
+
+    public void setTurn(int turn) {
+        this.turn = turn;
+    }
 
     public Chessmatch(){
         board = new Board(8,8);
+        turn = 1;
+        bw = Color.WHITE;
         initialize();
     }
-    
+    private void nextTurn(){
+        turn++;
+        if (bw == Color.WHITE)
+            bw = Color.BLACK;
+        else 
+            bw = Color.WHITE;
+    }
     public ChessPiece[][] getPieces(){
         ChessPiece[][] mat = new ChessPiece[board.getRows()][board.getColumns()];
         for (int i = 0; i<board.getRows();i++)
@@ -31,14 +49,23 @@ public class Chessmatch {
         validateFrom(f);
         validateTo(f,t);
         Piece capturedPiece = makeMove(f,t);
+        nextTurn();
         return (ChessPiece) capturedPiece;
     }
-
+    public boolean [][] possibleMoves(ChessPos from){
+        Position pos = from.toPos();
+        validateFrom(pos);
+        return board.pieces(pos).possibleMoves();
+    }
    private void validateFrom(Position p){
         if (!board.pieceE(p))
             throw new ChessExcep("There is no piece at starting spot !");
         if (!board.pieces(p).isThereAnyPossibleMoves())
             throw new ChessExcep("No available moves !");
+        if (bw != ((ChessPiece)board.pieces(p)).getCor())
+            throw new ChessExcep("Not your turn !");
+
+
    }
 
    private Piece makeMove(Position from,Position to){
@@ -75,5 +102,21 @@ public class Chessmatch {
 
     private void placeNewPiece(char c,int r,ChessPiece p){
         board.placePiece(p, new ChessPos(r, c).toPos());
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
+    }
+
+    public Color getBw() {
+        return bw;
+    }
+
+    public void setBw(Color bw) {
+        this.bw = bw;
     }
 }

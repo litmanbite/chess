@@ -1,6 +1,7 @@
 import chess.ChessExcep;
 import chess.ChessPiece;
 import chess.ChessPos;
+import chess.Chessmatch;
 import chess.Color;
 import java.util.Scanner;
 public class UI {
@@ -53,11 +54,31 @@ public class UI {
 		System.out.println(ANSI_CYAN + "   _________________" + ANSI_RESET);
 		System.out.println("    a b c d e f g h");
 	}
+	public static void printBoard(ChessPiece[][] pieces,boolean [][] possibleMoves) {
+		System.out.println(ANSI_CYAN + "   _________________" + ANSI_RESET);
+		for (int i = 0; i < pieces.length; i++) {
+			System.out.print((8 - i) + ANSI_CYAN + " | " + ANSI_RESET);
+			for (int j = 0; j < pieces[i].length; j++) {
+				printPiece(pieces[i][j], possibleMoves[i][j]);
+			}
+			System.out.println(ANSI_CYAN + "|" + ANSI_RESET);
+		}
+		System.out.println(ANSI_CYAN + "   _________________" + ANSI_RESET);
+		System.out.println("    a b c d e f g h");
+	}
+
+	public static void printMatch(Chessmatch cm){
+		printBoard(cm.getPieces());
+		System.out.println();
+		System.out.println("Turn :"+cm.getTurn());
+		System.out.println("Waiting for :"+ cm.getBw());
+
+	} 
 
 
    private static void printPiece(ChessPiece piece, boolean background) {
 		if (background) {
-			System.out.print(ANSI_BLUE_BACKGROUND);
+			System.out.print(ANSI_PURPLE_BACKGROUND);
 		}
 		if (piece == null) {
 			System.out.print("-" + ANSI_RESET);

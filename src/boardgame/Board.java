@@ -1,5 +1,7 @@
 package boardgame;
 
+import chess.ChessPiece;
+
 public class Board {
     private int rows;
     private int columns;
@@ -29,7 +31,7 @@ public class Board {
         this.columns = columns;
     }
 
-    public Piece[][] getPieces() {
+    public Piece[][] getPieces(ChessPiece p) {
         return pieces;
     }
 
