@@ -3,6 +3,8 @@ import chess.ChessPiece;
 import chess.ChessPos;
 import chess.Chessmatch;
 import chess.Color;
+
+import java.util.List;
 import java.util.Scanner;
 public class UI {
 
@@ -26,8 +28,9 @@ public class UI {
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 
 	public static void clearScreen() {
-		System.out.println("\033[H\033[2J");
-		System.out.flush();
+		for (int i = 0; i < 30; i++) {
+			System.out.println();
+		}
 	}
 	
 	public static ChessPos readChessPos (Scanner sc){
@@ -67,11 +70,15 @@ public class UI {
 		System.out.println("    a b c d e f g h");
 	}
 
-	public static void printMatch(Chessmatch cm){
+	public static void printMatch(Chessmatch cm,List<ChessPiece> lcp){
 		printBoard(cm.getPieces());
+		System.out.println();
+		listCap(lcp);
 		System.out.println();
 		System.out.println("Turn :"+cm.getTurn());
 		System.out.println("Waiting for :"+ cm.getBw());
+		if (cm.isCheck())
+			System.out.println("CHECK!");
 
 	} 
 
@@ -92,6 +99,19 @@ public class UI {
 		System.out.print(" ");
 	}
 
-
+	private static void listCap(List<ChessPiece> lcp){
+		List<ChessPiece> w = lcp.stream().filter(p -> p.getCor() == Color.WHITE).toList();
+		List<ChessPiece> b = lcp.stream().filter(p -> p.getCor() == Color.BLACK).toList();
+		for (ChessPiece chessPiece : b) {
+			System.out.println(ANSI_YELLOW);
+			System.out.println(chessPiece.toString());
+		}
+		System.out.println(ANSI_RESET);
+		for (ChessPiece chessPiece2 : w) {
+			System.out.println(ANSI_WHITE);
+			System.out.println(chessPiece2.toString());
+		}
+		System.out.println(ANSI_RESET);
+	}
 
 }
