@@ -71,4 +71,15 @@ public class Board {
     public boolean positionE(Position p){
         return posE(p.getRow(),p.getColumn());
     }
+
+    public Piece rmPiece(Position pos){
+        if (!positionE(pos))
+            throw new BoardExcep("Not on the board!");
+        if (pieces(pos)==null)
+            return null;
+        Piece aux = pieces(pos);
+        aux.position=null;
+        pieces[pos.getRow()][pos.getColumn()] = null;
+        return aux;
+    }
 }
