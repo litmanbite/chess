@@ -29,6 +29,7 @@ public class Chessmatch {
         Position f = from.toPos();
         Position t = to.toPos();
         validateFrom(f);
+        validateTo(f,t);
         Piece capturedPiece = makeMove(f,t);
         return (ChessPiece) capturedPiece;
     }
@@ -45,6 +46,11 @@ public class Chessmatch {
         Piece captured = board.rmPiece(to);
         board.placePiece(p, to);
         return captured;
+   }
+
+   private void validateTo(Position from,Position to){
+        if (!board.pieces(from).possibleMove(to))
+            throw new ChessExcep("Not a possible move for this piece");
    }
 
     private void initialize() {
