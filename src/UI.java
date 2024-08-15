@@ -76,10 +76,15 @@ public class UI {
 		listCap(lcp);
 		System.out.println();
 		System.out.println("Turn :"+cm.getTurn());
-		System.out.println("Waiting for :"+ cm.getBw());
-		if (cm.isCheck())
-			System.out.println("CHECK!");
-
+		if (!cm.getCheckMate()) {
+			System.out.println("Waiting player: " + cm.getBw());
+			if (cm.isCheck()) {
+				System.out.println("CHECK!");
+			}
+		} else {
+			System.out.println("CHECKMATE!");
+			System.out.println("Winner: " + cm.getBw());
+		}
 	} 
 
 
