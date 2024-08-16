@@ -1,18 +1,61 @@
-## Getting Started
+Resumo do Projeto
+Este projeto implementa uma versão básica do jogo de xadrez em Java, simulando um tabuleiro de xadrez e as peças, além de permitir o movimento das peças de acordo com as regras tradicionais do jogo. O projeto é projetado para demonstrar a lógica fundamental do xadrez, manipulação de peças e controle do jogo, servindo como uma base para futuras extensões e melhorias.
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Objetivos
+Simular um Tabuleiro de Xadrez:
 
-## Folder Structure
+Criar e gerenciar um tabuleiro de xadrez 8x8.
+Posicionar peças de xadrez nas posições iniciais.
+Implementar Peças de Xadrez:
 
-The workspace contains two folders by default, where:
+Representar as peças clássicas: Torre, Cavalo, Bispo, Rainha, Rei e Peão.
+Implementar a lógica de movimento e captura para cada tipo de peça.
+Gerenciar Movimentos e Regras:
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+Permitir que as peças se movam de acordo com suas regras específicas.
+Implementar regras básicas como captura de peças adversárias, movimentos válidos e verificação de movimentos especiais (como roque e promoção de peões).
+Interface de Usuário:
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+Fornecer uma interface simples para visualizar o tabuleiro e as peças.
+Permitir ao usuário realizar movimentos de peças através de comandos ou interações básicas.
+Funcionalidades
+Representação do Tabuleiro:
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+Classe Board para gerenciar o estado do tabuleiro.
+Matriz 8x8 que armazena peças e suas posições.
+Peças de Xadrez:
 
-## Dependency Management
+Classes Piece e suas subclasses (Rook, Knight, Bishop, Queen, King, Pawn).
+Implementação das regras de movimento para cada tipo de peça.
+Controle de cor das peças (branca e preta).
+Movimentação de Peças:
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+Métodos para verificar movimentos válidos e capturas.
+Implementação de movimentos especiais (movimento duplo de peão, en passant, roque).
+Configuração Inicial:
+
+Método para posicionar peças nas posições iniciais do jogo.
+Criação de um método para configurar o tabuleiro com peças brancas e pretas nas suas posições padrão.
+Interface Simples:
+
+Visualização básica do tabuleiro e peças.
+Métodos para imprimir o estado atual do tabuleiro e peças.
+Arquitetura do Projeto
+Classes Principais:
+
+Board: Gerencia o tabuleiro de xadrez e a colocação das peças.
+Piece: Classe abstrata que define a interface para todas as peças.
+Rook, Knight, Bishop, Queen, King, Pawn: Classes específicas que implementam a lógica de movimento para cada tipo de peça.
+Auxiliares:
+
+Position: Representa a posição de uma peça no tabuleiro.
+Color: Enumeração para definir a cor das peças.
+Como Executar
+Compilar e Executar:
+
+Compile as classes Java com javac.
+Execute o programa com java ChessGame.
+Interações:
+
+O programa inicializa um tabuleiro com peças nas posições padrão.
+Permite ao usuário visualizar o estado atual do tabuleiro e fazer movimentos básicos.
