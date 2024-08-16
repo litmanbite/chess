@@ -3,7 +3,8 @@ import chess.ChessPiece;
 import chess.ChessPos;
 import chess.Chessmatch;
 import chess.Color;
-
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 public class UI {
@@ -28,9 +29,8 @@ public class UI {
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 
 	public static void clearScreen() {
-		for (int i = 0; i < 30; i++) {
-			System.out.println();
-		}
+		System.out.print("\033[H\033[2J");
+        System.out.flush();
 	}
 	
 	public static ChessPos readChessPos (Scanner sc){
@@ -107,15 +107,14 @@ public class UI {
 	private static void listCap(List<ChessPiece> lcp){
 		List<ChessPiece> w = lcp.stream().filter(p -> p.getCor() == Color.WHITE).toList();
 		List<ChessPiece> b = lcp.stream().filter(p -> p.getCor() == Color.BLACK).toList();
-		for (ChessPiece chessPiece : b) {
+		
 			System.out.println(ANSI_YELLOW);
-			System.out.println(chessPiece.toString());
-		}
+			System.out.print(Arrays.toString(w.toArray()));		
 		System.out.println(ANSI_RESET);
-		for (ChessPiece chessPiece2 : w) {
+		
 			System.out.println(ANSI_WHITE);
-			System.out.println(chessPiece2.toString());
-		}
+			System.out.print(Arrays.toString(b.toArray()));
+		
 		System.out.println(ANSI_RESET);
 	}
 
