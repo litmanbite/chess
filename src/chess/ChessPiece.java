@@ -38,6 +38,8 @@ public abstract class ChessPiece extends Piece {
         return cp != null && cor != cp.getCor();
     }
 
-    
+    public ChessPos getChessPos(){
+        return ChessPos.fromPosition(position);
+    }
 
 }

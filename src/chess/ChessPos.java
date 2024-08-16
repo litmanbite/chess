@@ -30,13 +30,12 @@ public class ChessPos {
         this.r = r;
     }
 
-    protected Position toPos(){
-        return new Position(8 - r,c - 'a'); 
+    protected Position toPos() {
+        return new Position(8 - r, c - 'a');
     }
-
-    protected static ChessPos fromPos(Position pos)
-    {
-        return new ChessPos( 8 - pos.getRow(),(char) ('a'-pos.getColumn()));
+    
+    protected static ChessPos fromPosition(Position position) {
+        return new ChessPos(8 - position.getRow(),(char) ('a' + position.getColumn()));
     }
 
     @Override
