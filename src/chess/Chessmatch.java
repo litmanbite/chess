@@ -1,16 +1,21 @@
 package chess;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import boardgame.Board;
 import boardgame.Piece;
 import boardgame.Position;
 import pieces.King;
+import pieces.Pawn;
 import pieces.Rook;
 
 public class Chessmatch {
     private Board board;
     private Color bw;
     private int turn;
-
+    private List<Piece> piecesOnTheBoard = new ArrayList<>();
+	private List<Piece> capturedPieces = new ArrayList<>();
     public int getTurn() {
         return turn;
     }
@@ -69,7 +74,8 @@ public class Chessmatch {
    }
 
    private Piece makeMove(Position from,Position to){
-        Piece p = board.rmPiece(from);
+        ChessPiece p = (ChessPiece) board.rmPiece(from);
+        p.increaseMoveCount();
         Piece captured = board.rmPiece(to);
         board.placePiece(p, to);
         return captured;
@@ -91,7 +97,7 @@ public class Chessmatch {
         placeNewPiece('h', 8, new Rook(board, Color.BLACK));
         //  placeNewPiece('a', 2, new Pawn(board, Color.WHITE, this));
      //   placeNewPiece('b', 2, new Pawn(board, Color.WHITE, this));
-        //  placeNewPiece('c', 2, new Pawn(board, Color.WHITE, this));
+         placeNewPiece('c', 2, new Pawn(board, Color.WHITE, this));
        //   placeNewPiece('d', 2, new Pawn(board, Color.WHITE, this));
       //    placeNewPiece('e', 2, new Pawn(board, Color.WHITE, this));
       //    placeNewPiece('f', 2, new Pawn(board, Color.WHITE, this));
@@ -119,4 +125,16 @@ public class Chessmatch {
     public void setBw(Color bw) {
         this.bw = bw;
     }
+    private void undoMove(Position source, Position target, Piece capturedPiece) {
+		ChessPiece p = (ChessPiece)board.rmPiece(target);
+		p.decreaseMoveCount();
+		board.placePiece(p, source);
+		
+		if (capturedPiece != null) {
+			board.placePiece(capturedPiece, target);
+			capturedPieces.remove(capturedPiece);
+			piecesOnTheBoard.add(capturedPiece);
+		}
+
+}
 }
